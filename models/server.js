@@ -11,6 +11,7 @@ class Server {
         this.dataBase();
         //PATH
         this.userPath = '/api/users';
+        this.authPath = '/api/auth';
         //Middleware
         this.middlewares();
         //Routes of the app
@@ -32,6 +33,7 @@ class Server {
     }
 
     routes() {
+        this.app.use(this.authPath, require('../routes/auth.routes'));
         this.app.use(this.userPath, require('../routes/user.routes'));
     }
 

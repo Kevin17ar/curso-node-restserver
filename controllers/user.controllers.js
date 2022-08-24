@@ -65,16 +65,19 @@ const postUser = async(req, res = response) => {
     });
 }
 
-const deleteUser = async(req, res = response) => {
+const deleteUser = async(req = request, res = response) => {
     const {id} = req.params;
-
+    const userAuthenticated = req.userAuthenticated;
     //Fisicamente lo borramos
     //const user = await User.findByIdAndDelete(id);
+
+    // Desactivamos usuario
     const user = await User.findByIdAndUpdate(id, {state: false}, {new: true});
-    
+
     res.json({
         msg: 'delete api - controller',
-        user
+        user_Delete: user,
+        //userAuthenticated
     });
 }
 
