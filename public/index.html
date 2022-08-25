@@ -37,8 +37,12 @@
 
             fetch('http://localhost:8080/api/auth/google',{
                 method: 'POST',
+                referrerPolicy: {
+                    policy: 'strict-origin-when-cross-origin'
+                },
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+
                 },
                 body: JSON.stringify(body)
             })
