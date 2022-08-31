@@ -1,5 +1,6 @@
-const Role = require('../models/role')
-const User = require('../models/user');
+const {Category, User, Role, Product} = require('../models');
+const { response, request } = require("express");
+
 
 //Verifica si el role existe en la base de datos
 const roleExist = async(role = '')=>{
@@ -28,8 +29,36 @@ const userExistById = async(id) => {
     }
 };
 
+//Verificar si la categorua existe
+const categoryExistById = async(id) => {
+    const category = await Category.findById(id);
+
+    if ( !category ) {
+        throw new Error(`Category ${id} not exist`);
+    }
+};
+
+const categoryExistByName = async(nameCategory) => {
+    const category = await Category.findOne({name: nameCategory.toUpperCase()});
+
+    if ( !category ) {
+        throw new Error(`Category ${nameCategory} not exist`);
+    }
+};
+
+const productExistById = async(id) => {
+    const product = await Product.findById(id);
+
+    if ( !product ) {
+        throw new Error(`Product ${id} not exist`);
+    }
+};
+
 module.exports = {
     roleExist,
     emailExist,
-    userExistById
+    userExistById,
+    categoryExistById,
+    productExistById,
+    categoryExistByName
 };

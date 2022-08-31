@@ -14,8 +14,6 @@ const generateJwt = (uid = '') => {
                 resolve(token);
             }
         })
-
-
     })
 };
 
